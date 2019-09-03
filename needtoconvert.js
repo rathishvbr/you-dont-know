@@ -18,3 +18,15 @@ function metaDataBuilderFromId(selector) {
 		}, {});
 	return result;
 }
+
+
+
+
+
+
+//Solution
+
+
+
+
+a.slice(16).replace(/=/g, ":").replace('[[', "[{").replace(']]', '}]').replace(/null]/g, 'null}').replace(/\[val/g, '{val');
