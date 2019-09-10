@@ -49,3 +49,40 @@ let concateTwo = trimedResult.substring(endPoint, braceinserted.length - 1);
 let outputTwo = concateOne + concateTwo;
 
 console.log(convertObj(outputTwo));
+
+
+
+
+
+
+
+////////////////////////////////////////////////
+
+					<br>
+					<div class="-oneX-col-lg-5 -oneX-col-md-5 -oneX-col-sm-5">
+							<select id="retryStrategy" name="retryStrategy" class="-oneX-dropdown" style="width: 30%; max-width: 215px!important;" aria-invalid="true" aria-describedby="retryStrategy-err">
+							<option value=""></option>
+							<c:forEach items="${retryStrategies}" var="item">
+							<option value="${item.value}">${item.label}</option>
+							</c:forEach></select>
+							<div id="retryStrategy-err" class="-oneX-widget__err-text" style="display:none" aria-live="assertive">You must select a retry strategy for your service.</div>
+					</div>
+				<!-- sfx-->
+
+
+				<span id="selectState" index=${loop.index} metadata="${mdp['addressMetadataPrototype']['stateProvince']}" disabled="${readOnlyView}"> </span>
+					
+					<br>
+					<c:choose> 
+						<c:when test="${enteredAddress.residentialAddress}">
+							<sfx:selectRow name="allAddresses[${loop.index}].stateProvince" metadata="${mdp['addressMetadataPrototype']['stateProvince']}" disabled="${readOnlyView}"/>
+							<c:set var="disableZipcode" value="true"/>
+						</c:when>
+						<c:otherwise>
+							<sfx:selectRow name="allAddresses[${loop.index}].stateProvince" metadata="${mdp['mailingAddressMetadataPrototype']['stateProvince']}" disabled="${readOnlyView}"/>
+							<c:set var="disableZipcode" value="${readOnlyView}"/>
+						</c:otherwise>
+					</c:choose>
+
+
+<div id="sfx_allAddresses[0].stateProvince_row" class="row-fluid control-group "><div class="span7">  <label id="sfx_allAddresses[0].stateProvince_lbl" data-identifier="0" for="sfx_allAddresses[0].stateProvince_input" class="label-edit" data-name="allAddresses[0].stateProvince"> State    </label>  </div><div class="span5">      <select id="sfx_allAddresses[0].stateProvince_input" name="allAddresses[0].stateProvince" data-identifier="0" class="default input-edit " data-required="true" aria-required="true" data-validators="required;" data-suffix=" "> <option class="isHint" value="" disabled="disabled"> </option>  <option data-identifier="0" value="AL">Alabama</option> <option data-identifier="0" value="AK">Alaska</option> <option data-identifier="0" value="AZ">Arizona</option> <option data-identifier="0" value="AR">Arkansas</option> <option data-identifier="0" value="CA">California</option> <option data-identifier="0" value="CO">Colorado</option> <option data-identifier="0" value="CT">Connecticut</option> <option data-identifier="0" value="DE">Delaware</option> <option data-identifier="0" value="DC">District of Columbia</option> <option data-identifier="0" value="FL">Florida</option> <option data-identifier="0" value="GA">Georgia</option> <option data-identifier="0" value="HI">Hawaii</option> <option data-identifier="0" value="ID">Idaho</option> <option data-identifier="0" value="IL">Illinois</option> <option data-identifier="0" value="IN">Indiana</option> <option data-identifier="0" value="IA" selected="selected">Iowa</option> <option data-identifier="0" value="KS">Kansas</option> <option data-identifier="0" value="KY">Kentucky</option> <option data-identifier="0" value="LA">Louisiana</option> <option data-identifier="0" value="ME">Maine</option> <option data-identifier="0" value="MD">Maryland</option> <option data-identifier="0" value="MA">Massachusetts</option> <option data-identifier="0" value="MI">Michigan</option> <option data-identifier="0" value="MN">Minnesota</option> <option data-identifier="0" value="MS">Mississippi</option> <option data-identifier="0" value="MO">Missouri</option> <option data-identifier="0" value="MT">Montana</option> <option data-identifier="0" value="NE">Nebraska</option> <option data-identifier="0" value="NV">Nevada</option> <option data-identifier="0" value="NH">New Hampshire</option> <option data-identifier="0" value="NJ">New Jersey</option> <option data-identifier="0" value="NM">New Mexico</option> <option data-identifier="0" value="NY">New York</option> <option data-identifier="0" value="NC">North Carolina</option> <option data-identifier="0" value="ND">North Dakota</option> <option data-identifier="0" value="OH">Ohio</option> <option data-identifier="0" value="OK">Oklahoma</option> <option data-identifier="0" value="OR">Oregon</option> <option data-identifier="0" value="PA">Pennsylvania</option> <option data-identifier="0" value="RI">Rhode Island</option> <option data-identifier="0" value="SC">South Carolina</option> <option data-identifier="0" value="SD">South Dakota</option> <option data-identifier="0" value="TN">Tennessee</option> <option data-identifier="0" value="TX">Texas</option> <option data-identifier="0" value="UT">Utah</option> <option data-identifier="0" value="VT">Vermont</option> <option data-identifier="0" value="VA">Virginia</option> <option data-identifier="0" value="WA">Washington</option> <option data-identifier="0" value="WV">West Virginia</option> <option data-identifier="0" value="WI">Wisconsin</option> <option data-identifier="0" value="WY">Wyoming</option></select>    </div>  <p id="sfx_allAddresses[0].stateProvince_alert" data-name="allAddresses[0].stateProvince" class="flag   hide"><span id="sfx_allAddresses[0].stateProvince_alertSeverity" class="alertSeverity icon"></span><span id="sfx_allAddresses[0].stateProvince_alertMessage" class="alertMessage"></span></p> </div>
