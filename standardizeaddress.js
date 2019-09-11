@@ -6,7 +6,9 @@
 // 	console.log(JSON.stringify(x.getAttribute("metadata")));
 // });
 
+//Idea here is to use this utility file to build html elements by using jsp metaObject. 
 
+//Get the selector string then convert into JSON object for building the elements
 function metaDataBuilderFromId(selector) {
 	var x = document.getElementById(selector);
 	metaData = x.getAttribute("metadata");
@@ -25,6 +27,7 @@ function metaDataBuilderFromId(selector) {
 	return result;
 }
 
+//Element getter
 function validatorsDataBuilderFromId(selector) {
 	return document.getElementById(selector).getAttribute("validators");
 }
@@ -33,6 +36,7 @@ function valueDataBuilderFromId(selector) {
 	return document.getElementById(selector).getAttribute("value");
 }
 
+//Building the full block of textfields by using validation and metaData object
 function buildAll(point, selector) {
 	console.log(point);
 	let metaData = metaDataBuilderFromId(selector);
@@ -49,6 +53,7 @@ function buildAll(point, selector) {
 	return `<div id="${point}_row" class="row-fluid control-group ">` + label + input + alertDiv + `</div>`
 }
 
+//Building the full block of selector with multiple option by using metaData object
 function buildAllForSelector(point, selector) {
 	let metaData = metaDataBuilderFromIdForSelector(selector);
 	// let value = valueDataBuilderFromId(selector);
@@ -58,6 +63,7 @@ function buildAllForSelector(point, selector) {
 	return `<div id="${point}_row" class="row-fluid control-group ">` + label + input + alertDiv + `</div>`;
 }
 
+//Base object converter TODO: this can be used for metaDataBuilderFromId aswell to covert the object
 function convertObj(obj){
 	return obj.split(',')
 		  .map(keyVal => {
@@ -72,6 +78,8 @@ function convertObj(obj){
 		  }, {});
   }
 
+
+//Selector metaData parser, extract the metaData for select option.
 function metaDataBuilderFromIdForSelector(selector) {
 	var a = document.getElementById(selector).getAttribute("metadata");
 	let braceinserted = a.slice(16).replace(/=/g, ":").replace('[[', "[{").replace(']]', '}]').replace(/null]/g, 'null}').replace(/\[val/g, '{val');
@@ -110,23 +118,26 @@ function metaDataBuilderFromIdForSelector(selector) {
 	  return {outputOne, outputTwo};
 }
 
+//Build the label block
 function buildLabel(point, metaData) {
 	let name = point.replace('sfx_','');
 	return `<div class="span7"> <label id="${point}_lbl" data-identifier="${metaData.identifier}" for="${point}_input"
 	class="label-edit" data-name="${name}"> ${metaData.label} </label> </div>`;
 }
 
+//Build the select input element with ooptions block
 function buildInputSelector(point, selector, metaData) {
 	let name = point.replace('sfx_','');
-	let selector = selector.map(d => `<option data-identifier="0" value="${d.value}">${d.label}</option>`);
+	let selectors = selector.map(d => `<option data-identifier="0" value="${d.value}">${d.label}</option>`);
 	return `<div class="span5"> <select id="${point}_input" name="${name}"
 	data-identifier="${metaData.identifier}" class="default input-edit " data-required="${metaData.required}" aria-required="${metaData.required}"
 	data-validators="required;" data-suffix=" ">
 	<option class="isHint" value="" disabled="disabled"> </option>
-`+selector.join("")
+`+selectors.join("")
 +`</select> </div>`;
 }
 
+//Build input text field block 
 function buildInput(point, metaData, validation, value) {
 	let name = point.replace('sfx_','');
 	return `<div class="span5"> <input id="${point}_input" name="${name}" data-identifier="${metaData.identifier}"
@@ -135,12 +146,15 @@ function buildInput(point, metaData, validation, value) {
 </div>`;
 }
 
+//Build alert block with validation
 function buildAlert(point) {
 	let name = point.replace('sfx_','');
 	return `<p id="${point}_alert" data-name="${name}" class="flag   hide"><span id="${point}_alertSeverity"
 	class="alertSeverity icon"></span><span id="${point}_alertMessage" class="alertMessage"></span></p>`;
 }
 
+
+//Get the selector from JSP file and cook the elements with all functions then build the HTML elements dynamically 
 
 document.getElementById("street1_row").innerHTML = buildAll(
 	'sfx_allAddresses' +
@@ -160,18 +174,5 @@ document.getElementById("street1_row").innerHTML = buildAll(
 			  	'sfx_allAddresses' +
 			  	`[${document.getElementById('selectState').getAttribute("index")}].` +
 				'selectState', 'selectState');
-			
-			
-			
-			// <span id="selectState"  id=${loop.index} metadata="${mdp['addressMetadataPrototype']['stateProvince']}" disabled="${readOnlyView}"> </span>
-	
-			
-			
-			
-			
-			
-			
-			
-			
 			
 			
